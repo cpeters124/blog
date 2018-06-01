@@ -1,10 +1,10 @@
 const http = require('http');
-
-const hostname = '127.0.0.1';
-const port = 8080;
+var fs = require('fs');
 
 http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.write('Jesus is King!');
-  res.end();
+  fs.readFile('/views/index.html',function (err, data){
+        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+        res.write(data);
+        res.end();
+    });
 }).listen(8080);
